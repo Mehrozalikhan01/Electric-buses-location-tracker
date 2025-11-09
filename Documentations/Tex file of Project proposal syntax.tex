@@ -1,0 +1,253 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs,longtable,array}
+\usepackage{setspace}
+\usepackage[table]{xcolor} % for colored table cells
+\usepackage[hidelinks]{hyperref}
+\usepackage{tocloft}
+
+% Custom link color settings
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue!60!black,
+    citecolor=black
+}
+
+% Professional TOC style
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\setstretch{1.2}
+
+\title{Electric Buses Location Tracker App}
+\author{Ali Abbas, Laiba Tajj, Mehroz Ali Khan \\ Namal University Mianwali}
+\date{November 09, 2025}
+
+\begin{document}
+
+% ---------- COVER PAGE ----------
+\pagenumbering{gobble} % No page numbers on cover
+
+\begin{center}
+\includegraphics[width=4cm]{namal logo.png}\\[1em]
+\textbf{\Large Namal University Mianwali}\\
+\textbf{Department of Computer Science}\\[2em]
+\end{center}
+
+\begin{center}
+\textbf{\Huge Electric Buses Location Tracker App}\\[1em]
+\textbf{Project Proposal}\\[2em]
+\end{center}
+
+\section*{Team Members}
+
+\begin{longtable}{@{}p{0.3\linewidth}p{0.3\linewidth}p{0.35\linewidth}@{}}
+\toprule
+\textbf{Name} & \textbf{Roll No} & \textbf{Email} \\
+\midrule
+Ali Abbas & NUM-BSCS-2024-06 & \href{mailto:bscs24f06@namal.edu.pk}{bscs24f06@namal.edu.pk} \\
+Laiba Tajj & NUM-BSCS-2024-31 & \href{mailto:bscs24f31@namal.edu.pk}{bscs24f31@namal.edu.pk} \\
+Mehroz Ali Khan & NUM-BSCS-2024-34 & \href{mailto:bscs24f34@namal.edu.pk}{bscs24f34@namal.edu.pk} \\
+\bottomrule
+\end{longtable}
+
+\section*{Stakeholder}
+\begin{tabular}{@{}ll@{}}
+\textbf{Name:} & Asiya Batool \\
+\textbf{Email:} & \href{mailto:asia.batool@namal.edu.pk}{asia.batool@namal.edu.pk} \\
+\end{tabular}
+
+\vspace{1em}
+\textbf{Submission Date:} November 09, 2025
+
+% ---------- PAGE BREAK FOR TOC ----------
+\newpage
+
+\begin{center}
+\textbf{\Huge Table of Contents}
+\end{center}
+\vspace{1em}
+
+\tableofcontents
+\thispagestyle{plain}
+
+% ---------- PAGE BREAK FOR MAIN CONTENT ----------
+\newpage
+\pagenumbering{arabic} % Start numbering from here
+
+\section{Introduction}
+The increasing focus on transportation by the Government of Punjab has led to the introduction of electric buses in the Mianwali district. These buses provide transportation facilities to the citizens of Mianwali. However, a challenge remains — there is currently no system for monitoring transportation, especially in Mianwali. People lack reliable information about bus schedules and arrival times. 
+
+The Electric Bus Tracking System addresses this issue by enabling real-time monitoring of these buses. This system integrates GPS tracking to provide accurate location details and offers a user interface for passengers to view routes, live locations, and arrival times. It benefits both passengers and transportation authorities by improving service reliability, reducing waiting times, and ensuring better control over bus operations.
+
+\section{Problem Statement}
+The electric bus system in Mianwali currently lacks a reliable and real-time information service for passengers. Transport administrators face difficulties managing routes and monitoring live locations of buses, especially in cases of technical or operational issues. 
+
+The absence of a tracking system negatively impacts operational decision-making, and passengers cannot track buses in real time. Therefore, a real-time Electric Bus Tracking System is needed to show accurate live locations, estimated arrival times, and schedule updates. Implementing this system will allow passengers to trace live bus movements and improve overall service efficiency.
+
+\section{Objectives}
+The main objective of this project is to design and document a complete software-based solution that enables real-time tracking and management of electric buses in Mianwali.
+
+\textbf{Objectives of the system:}
+\begin{itemize}
+  \item Identify system requirements through consultation with stakeholders in Mianwali District.
+  \item Develop a system that uses GPS for real-time bus tracking.
+  \item Design a user-friendly interface for passengers to view live bus locations, estimated arrival times, and routes.
+  \item Enable transport administrators to monitor bus operations and respond promptly to issues.
+  \item Improve public transport reliability, reduce waiting times, and promote the use of electric buses.
+\end{itemize}
+
+\section{Stakeholder Identification}
+Our project, \textbf{Electric Buses System}, is based on the new electric “green buses” service introduced in various Punjab cities by the government. The system focuses on improving the public transport experience in Mianwali by helping passengers and management track buses efficiently.
+
+\textbf{Main stakeholders:}
+\begin{itemize}
+  \item \textbf{Passengers:} Main users of the system to check bus routes, timings, and live updates.
+  \item \textbf{Drivers:} Share live locations and report delays or issues in real time.
+  \item \textbf{Management Department:} Monitors buses, routes, and reports for better oversight.
+  \item \textbf{Government Officials/Admin:} Use system data for planning, making improvements, and maintaining quality.
+  \item \textbf{Project Team:} Gather requirements, design prototypes, and prepare complete documentation.
+\end{itemize}
+
+\section{Software Development Methodology}
+This project uses the \textbf{Agile Scrum Methodology}, which promotes teamwork, flexibility, and continuous feedback. The methodology divides work into small, manageable phases called \textit{sprints}, allowing iterative development and adaptation to changing requirements.
+
+\textbf{Main sprints:}
+\begin{itemize}
+  \item Understanding user and system requirements
+  \item Creating use case diagrams
+  \item Designing the software interface
+  \item Final documentation and prototype creation
+\end{itemize}
+
+Scrum ensures scalability and adaptability, making it possible to incorporate new features or improvements at any stage. It helps ensure that the final design aligns with real-world user needs.
+
+\subsection*{Project Schedule (Agile Scrum Methodology)}
+\begin{centre}
+\begin{tabular}{|p{3cm}|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Activity / Sprint} & \textbf{Jan} & \textbf{Feb} & \textbf{Mar} & \textbf{Apr} & \textbf{May} & \textbf{Jun}& \textbf{Jul}& \textbf{Aug}& \textbf{Sep}& \textbf{Oct}& \textbf{Nov}& \textbf{Dec}\\
+\hline
+Requirement Gathering 
+& \cellcolor{blue!40} 
+& \cellcolor{blue!40} 
+& \cellcolor{blue!40}
+& 
+& 
+&
+&
+&
+&
+&
+&
+&
+\\
+\hline
+Requirement Analysis 
+& 
+&
+& \cellcolor{green!50} 
+& \cellcolor{green!50} 
+& \cellcolor{green!50} 
+& 
+&
+&
+&
+&
+&
+&
+\\
+\hline
+System Modeling (Use Case + Diagrams) 
+& 
+& 
+&
+&
+& \cellcolor{yellow!60} 
+& \cellcolor{yellow!60} 
+& \cellcolor{yellow!60} 
+&
+&
+&
+&
+& 
+\\
+\hline
+UI/UX Prototyping (Figma) 
+& 
+& 
+& 
+&
+&
+&
+& \cellcolor{red!40} 
+& \cellcolor{red!40} 
+& \cellcolor{red!40} 
+&
+&
+&
+\\
+\hline
+Final Documentation 
+& 
+& 
+& 
+& 
+&
+&
+&
+&
+&
+& \cellcolor{purple!50} 
+& \cellcolor{purple!50}
+& \cellcolor{purple!50}
+\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Tools and Technologies}
+Since the project’s main focus is requirement gathering and prototyping, the following tools will be used:
+\begin{itemize}
+  \item \textbf{Designing Tool:} Figma — for wireframes and interactive prototypes.
+  \item \textbf{Documentation Tool:} LaTeX — for report writing and organization.
+  \item \textbf{Version Control:} GitHub — to store project materials and files.
+  \item \textbf{Diagram Tools:} Draw.io or Lucidchart — to create use case, DFD, and ER diagrams.
+\end{itemize}
+
+\newpage
+\section{Agreement Contract}
+\textbf{This Agreement is made on this \_\_\_\_ day of \_\_\_\_\_\_, 20\_\_\_.}
+
+\textbf{Between:} \\
+\textbf{Stakeholder:} Asiya Batool \\
+\textbf{Designation:} Lecturer, Namal University Mianwali \\
+\textbf{Phone/Email:} \href{mailto:asia.batool@namal.edu.pk}{asia.batool@namal.edu.pk}
+
+\textbf{And:} \\
+\textbf{Developer Team:} Ali Abbas, Laiba Tajj, Mehroz Ali Khan \\
+\textbf{Designation:} 2nd Year CS Students, Namal University Mianwali \\
+\textbf{Emails:} 
+\href{mailto:bscs24f06@namal.edu.pk}{bscs24f06@namal.edu.pk}, 
+\href{mailto:bscs24f31@namal.edu.pk}{bscs24f31@namal.edu.pk}, 
+\href{mailto:bscs24f34@namal.edu.pk}{bscs24f34@namal.edu.pk}
+
+\textbf{Terms \& Conditions:}
+\begin{enumerate}
+  \item Stakeholder agrees to provide full, clear requirements, meeting times when needed, and support if issues arise.
+  \item Developer team agrees to develop the app with full integrity, fulfilling all requirements and ensuring a well-designed final product.
+  \item Start Date: \_\_\_\_\_\_\_\_\_\_\_\_\_ \hspace{2em} End Date: \_\_\_\_\_\_\_\_\_\_\_\_\_\_
+  \item Payment/Compensation Details: \_\_\_\_\_\_\_\_\_\_\_\_\_
+  \item Either party may terminate this agreement within one week of the start date by written notice.
+  \item Both parties agree to act honestly and fairly throughout this project.
+\end{enumerate}
+
+\textbf{Signatures:}\\[1em]
+Stakeholder Signature: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \hspace{2em} Date: \_\_\_\_\_\_\_\_\_\_\_\\
+Stakeholder Printed Name: \textbf{Asiya Batool}\\[1em]
+Developer Team Signatures: (1) \_\_\_\_\_\_\_\_\_\_ (2) \_\_\_\_\_\_\_\_\_\_ (3) \_\_\_\_\_\_\_\_\_\_ \hspace{2em} Date: \_\_\_\_\_\_\_\_\_\\
+Developer Team Printed Names: \textbf{Ali Abbas, Laiba Tajj, Mehroz Ali Khan}
+
+\end{document}
