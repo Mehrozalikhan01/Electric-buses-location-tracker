@@ -237,7 +237,7 @@ For queries, suggestions, or collaboration:
 **Project Lead**: Mehroz Ali Khan 
 📧 Email: bscs24f34@namal.edu.pk  
 🏫 Institution: Namal University, Mianwali  
-🌐 GitHub: [Electric Bus Tracker Repository](https://github.com/YOUR_USERNAME/electric-bus-tracker)
+🌐 GitHub: [Electric Bus Tracker Repository](https://github.com/Mehrozalikhan01/Electric-buses-location-tracker.git)
 
 ---
 
@@ -253,7 +253,7 @@ April 2026         - Testing & Quality Assurance
 May 2026           - Final Documentation & Presentation
 ```
 
----
+
 
 
 **Built with ❤️ by Team Electric Bus Tracker**
