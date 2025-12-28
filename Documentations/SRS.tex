@@ -1,0 +1,668 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{array}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Electric Bus Location Tracker - SRS}
+\lhead{Namal University}
+\rfoot{Page \thepage}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\hypersetup{hidelinks}
+
+\begin{document}
+
+% ================= TITLE PAGE =================
+\begin{titlepage}
+\center
+\vspace*{2cm}
+
+\includegraphics[width=0.3\textwidth]{namal_logo.png}\\[1cm]
+
+{\huge\bfseries Software Requirements Specification}\\[0.5cm]
+{\LARGE Electric Bus Location Tracker App}\\[1.5cm]
+
+{\large Prepared for: Asiya Batool}\\
+{\large Department of Computer Science}\\
+{\large Namal University, Mianwali}\\[2cm]
+
+{\large\bfseries Prepared by:}\\[0.5cm]
+\begin{tabular}{ll}
+Ali Abbas & NUM-BSCS-2024-06\\
+Laiba Tajj & NUM-BSCS-2024-31\\
+Mehroz Ali Khan & NUM-BSCS-2024-34\\
+\end{tabular}\\[2cm]
+
+{\large 28 December 2024}
+
+\vfill
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ================= 1. INTRODUCTION =================
+\section{Introduction}
+
+\subsection{Purpose}
+This Software Requirements Specification (SRS) document provides a complete description of the Electric Bus Location Tracker App system. The document covers details of all functional and non-functional requirements for real-time tracking and management of electric buses in Mianwali District, Punjab, Pakistan.
+
+\subsection{Scope}
+The Electric Bus Location Tracker App is a mobile-based software system designed to provide real-time tracking and management facilities for the electric bus transportation system in Mianwali.
+
+\subsubsection{System Benefits}
+\begin{itemize}
+\item Real-time bus tracking
+\item Enhanced passenger experience
+\item Supports Drivers registration process
+\item Improved operational control
+\end{itemize}
+
+\subsubsection{System Objectives}
+\begin{itemize}
+\item Passengers ease of time management
+\item Provide Drivers duty schedule and attendence
+\item Support administrative monitoring and changes
+\end{itemize}
+
+\newpage
+\subsection{Definitions, Acronyms, and Abbreviations}
+\begin{table}[h]
+\begin{tabular}{|p{3cm}|p{10cm}|}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+API & Application Programming Interface - A set of protocols for building software applications \\
+\hline
+AWS & Amazon Web Services - Cloud computing platform used for hosting \\
+\hline
+EAT & Estimated Arrival Time\\
+\hline
+GPS & Global Positioning System - Satellite-based navigation system \\
+\hline
+GUI & Graphical User Interface \\
+\hline
+IEEE & Institute of Electrical and Electronics Engineers \\
+\hline
+JWT & JSON Web Token - Authentication mechanism \\
+\hline
+MongoDB & NoSQL database used for storing application data \\
+\hline
+NFR & Non-Functional Requirement \\
+\hline
+Node.js & JavaScript runtime environment for backend development \\
+\hline
+PMA & Punjab Mass Transit Authority \\
+\hline
+REST & Representational State Transfer - API architectural style \\
+\hline
+RP & Requirement Provider - Stakeholder providing system requirements \\
+\hline
+SRS & Software Requirements Specification \\
+\hline
+UI/UX & User Interface / User Experience \\
+\hline
+WebSocket & Protocol for real-time bidirectional communication \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{References}
+\begin{enumerate}
+    \item IEEE Standard 830-1998: IEEE Recommended Practice for Software Requirements Specifications
+    \item IEEE Standard 29148-2018: Systems and Software Engineering - Life Cycle Processes - Requirements Engineering
+    \item Google Maps API Documentation: \url{https://developers.google.com/maps}
+    \item Geeksforgeeks Documentation: \url{https://www.geeksforgeeks.org/software-engineering/software-requirement-specification-srs-format}
+    \item Flutter Documentation: \url{https://flutter.dev/docs}
+    \item Node.js Documentation: \url{https://nodejs.org/docs}
+    \item MongoDB Documentation: \url{https://docs.mongodb.com}
+    \item Socket.io Documentation: \url{https://socket.io/docs}
+    \item Claude : \url{https://claude.ai/chat}
+\end{enumerate}
+
+\subsection{Overview}
+This document describes system introduction, overall description, functional requirements, non-functional requirements, external interfaces, and appendices.
+
+\newpage
+
+% ================= 2. OVERALL DESCRIPTION =================
+\section{Overall Description}
+
+\subsection{Product Perspective}
+The Electric Bus Location Tracker App is a system integrated with GPS hardware, cloud services, and Google Maps API.
+
+\subsection{Product Functions}
+\textbf{Passengers}: Track buses, view routes, and ETA  \newline
+\textbf{Drivers}: View duties and share location  \newline
+\textbf{Administrators}: Monitor buses and manage operations  
+
+\subsection{User Characteristics}
+
+\subsubsection{Passengers}
+\begin{itemize}
+    \item \textbf{User Type}: General public with smartphone literacy
+    \item \textbf{Age Range}: All ages
+    \item \textbf{Language}: English
+\end{itemize}
+
+\subsubsection{Drivers}
+\begin{itemize}
+    \item \textbf{User Type}: Person with basic smartphone literacy and are registered by PMA, Mianwali 
+    \item \textbf{Age Range}: 25-55 years
+    \item \textbf{Language}: English
+\end{itemize}
+
+\subsubsection{Administrators}
+\begin{itemize}
+    \item \textbf{User Type}: Person with advance smartphone usage expertise and are registered by PMA, Lahore
+    \item \textbf{Age Range}: 25-50 years
+    \item \textbf{Language}: English
+\end{itemize}
+
+\subsection{Constraints}
+
+\subsubsection{Regulatory and Legal Constraints}
+\begin{itemize}
+    \item Must comply with Pakistan's data protection and privacy regulations
+    \item Must obtain user permission for location tracking
+    \item Must secure and protect personal user information
+    \item Must comply with Google Maps API terms of service
+\end{itemize}
+
+\subsubsection{Hardware Limitations}
+\begin{itemize}
+    \item GPS accuracy depends on satellite visibility and device quality
+    \item Mobile device battery consumption for continuous GPS tracking
+    \item Network connectivity limitations in remote areas
+\end{itemize}
+
+\subsubsection{Technical Constraints}
+\begin{itemize}
+    \item System must work with all types of Android devices
+    \item Google Maps API usage quotas and rate limits
+    \item Database storage capacity constraints
+\end{itemize}
+
+\subsubsection{Development Constraints}
+\begin{itemize}
+    \item Budget limitations for cloud services and API usage
+    \item Team size limited to three developers
+    \item Limited access to actual buses for testing
+\end{itemize}
+
+\subsection{Assumptions and Dependencies}
+
+\subsubsection{Assumptions}
+\begin{itemize}
+    \item All drivers will have smartphones with internet connectivity
+    \item Drivers will have working GPS installed in the smartphones
+    \item Passengers will have access to smartphones with GPS functionalities and internet connection
+    \item All the three type of users of the app: Driver, Passenger and Administration have literacy to English language
+    \item We have full support by the government and PMA
+\end{itemize}
+
+\subsubsection{Dependencies}
+\begin{itemize}
+    \item \textbf{Google Maps API}: System depends on Google Maps for mapping and routing
+    \item \textbf{Internet Connectivity}: Requires continuous internet connection for real-time tracking
+    \item \textbf{AWS Infrastructure}: System hosting depends on AWS availability
+    \item \textbf{GPS Satellites}: Location accuracy depends on GPS satellite availability
+    \item \textbf{Third-party Libraries}: Flutter packages, Node.js modules, and other dependencies
+    \item \textbf{Mobile OS Updates}: Compatibility may be affected by OS updates
+    \item \textbf{Stakeholder Cooperation}: Requires ongoing cooperation from stakeholder and PMA
+\end{itemize}
+
+% ================= 3. FUNCTIONAL REQUIREMENTS =================
+\section{Functional Requirements}
+
+\subsection{Driver and Administration Combined Functions}
+
+\subsubsection{User Authentication and Authorization}
+\begin{itemize}
+    \item \textbf{FR-001}: The system shall allow drivers and administrators to login using username, user ID, and password
+    \item \textbf{FR-002}: The system shall validate username, user ID, and passwords during login
+    \item \textbf{FR-003}: The system shall implement JWT-based authentication with 24-hour token expiry
+    \item \textbf{FR-004}: The system shall provide password reset functionality via email/SMS
+    \item \textbf{FR-005}: The system shall support two user roles for authentication and authorization: Driver, and Administrator
+    \item \textbf{FR-006}: The system shall enforce role-based access control for all features
+    \item \textbf{FR-007}: The system shall allow authenticated users to logout and invalidate authentication tokens
+    \item \textbf{FR-008}: The system shall lock accounts after 5 failed login attempts for 30 minutes
+\end{itemize}
+
+\subsubsection{Profile viewing}
+\begin{itemize}
+    \item \textbf{FR-009}: The system shall allow driver and administration to view their profile information
+\end{itemize}
+
+\subsection{Passenger Functions}
+
+\subsubsection{Show Real-time Bus Tracking}
+\begin{itemize}
+    \item \textbf{FR-010}: The system shall allow passengers to view real-time locations of all active buses
+    \item \textbf{FR-011}: The system shall allow passengers to view bus details
+    \item \textbf{FR-012}: The system shall allow passengers to pan across the map to view different areas
+    \item \textbf{FR-013}: The system shall show passenger's current location on the map
+\end{itemize}
+
+\subsubsection{Search Routes and Schedules}
+\begin{itemize}
+    \item \textbf{FR-014}: The system shall allow passengers to view all available bus routes
+    \item \textbf{FR-015}: The system shall allow passengers to search for a specific route information by route name
+    \item \textbf{FR-016}: The system shall allow passengers to search for routes by bus stop name
+    \item \textbf{FR-017}: The system shall display complete route details including start point, end point, estimated time, and all stops
+    \item \textbf{FR-018}: The system shall show all bus stops along each route on the map
+    \item \textbf{FR-019}: The system shall display schedule of buses for all routes
+    \item \textbf{FR-020}: The system shall provide functionality of searching the bus arrival timing of all the stops of all routes
+    \item \textbf{FR-021}: The system shall display total distance for the complete route and also from one stop to another
+    \item \textbf{FR-022}: The system shall display estimated travel time for the complete route
+\end{itemize}
+
+\subsubsection{Calculate Estimated Arrival Time (EAT)}
+\begin{itemize}
+    \item \textbf{FR-023}: The system shall allow passengers to know EAT for a near bus to a specific stop
+    \item \textbf{FR-024}: The system shall consider previous bus speed in EAT calculation
+    \item \textbf{FR-025}: The system shall update EAT every 30 seconds based on bus movement
+    \item \textbf{FR-026}: The system shall show "Arrived at [stop name]" when bus reaches the stop
+    \item \textbf{FR-027}: The system shall show "Departed from [stop name]" when bus leaves the stop
+    \item \textbf{FR-028}: The system shall display EATs for multiple buses if they serve the same route
+\end{itemize}
+
+\subsubsection{Manage Favorite Routes}
+\begin{itemize}
+    \item \textbf{FR-029}: The system shall allow passengers to save routes as favorites
+    \item \textbf{FR-030}: The system shall allow passengers to view their saved favorite routes
+    \item \textbf{FR-031}: The system shall allow passengers to remove routes from favorites
+    \item \textbf{FR-032}: The system shall provide quick access to favorite routes from home screen
+\end{itemize}
+
+\subsection{Driver Functions}
+
+\subsubsection{Duty Management}
+\begin{itemize}
+    \item \textbf{FR-033}: The system shall allow drivers to view their assigned duty for current day
+    \item \textbf{FR-034}: The system shall display assigned route and bus number for current duty
+    \item \textbf{FR-035}: The system shall allow drivers to view all duties assigned for the current month
+    \item \textbf{FR-036}: The system shall allow drivers to search for duties by specific date
+    \item \textbf{FR-037}: The system shall display duty schedule including route, bus, and timing
+    \item \textbf{FR-038}: The system shall show driver's next upcoming duty
+    \item \textbf{FR-039}: The system shall automatically mark its duty complete after arriving at the stop place of route
+    \item \textbf{FR-040}: The system shall record duty completion time and date
+    \item \textbf{FR-041}: The system shall allow driver to view its duties record means the duties completed and skipped the whole month or on a specific date
+\end{itemize}
+
+\subsubsection{Live Location Sharing}
+\begin{itemize}
+    \item \textbf{FR-042}: The system shall allow driver to start its duty on the starting time of duty
+    \item \textbf{FR-043}: The system shall share live location of the driver mobile GPS when he starts its duty
+    \item \textbf{FR-044}: The system shall allow drivers to view their own bus location in real-time
+    \item \textbf{FR-045}: The system shall allow drivers to view real-time locations of the buses which are on its route
+    \item \textbf{FR-046}: The system shall automatically mark its duty done when he reached the destination by bus
+    \item \textbf{FR-047}: The system shall stop sharing its location when he reached the destination by bus
+    \item \textbf{FR-048}: The system shall store the starting time and ending time of the duty on drivers duty schedule
+\end{itemize}
+
+\subsection{Administrator Functions}
+
+\subsubsection{Bus Monitoring and Management}
+\begin{itemize}
+    \item \textbf{FR-049}: The system shall allow administrators to view real-time locations of all buses
+    \item \textbf{FR-050}: The system shall display status of each bus (Active/Inactive)
+    \item \textbf{FR-051}: The system shall allow administrators to view detailed information for each bus
+    \item \textbf{FR-052}: The system shall allow administrators to add new buses to the system
+    \item \textbf{FR-053}: The system shall allow administrators to edit bus information
+    \item \textbf{FR-054}: The system shall allow administrators to remove buses from the system
+\end{itemize}
+
+\subsubsection{Route and Schedule Management}
+\begin{itemize}
+    \item \textbf{FR-055}: The system shall allow administrators to create new routes
+    \item \textbf{FR-056}: The system shall allow administrators to define bus stops for each route
+    \item \textbf{FR-057}: The system shall allow administrators to modify existing route information
+    \item \textbf{FR-058}: The system shall allow administrators to delete routes not in active use
+    \item \textbf{FR-059}: The system shall allow administrators to define schedule timings for each route
+    \item \textbf{FR-060}: The system shall allow administrators to modify schedule timings
+\end{itemize}
+
+\subsubsection{User Account Management}
+\begin{itemize}
+    \item \textbf{FR-061}: The system shall allow administrators to view all user accounts
+    \item \textbf{FR-062}: The system shall allow administrators to create new driver accounts
+    \item \textbf{FR-063}: The system shall allow administrators to edit driver account information
+    \item \textbf{FR-064}: The system shall allow administrators to activate driver accounts
+    \item \textbf{FR-065}: The system shall allow administrators to deactivate driver accounts
+    \item \textbf{FR-066}: The system shall prevent deletion of accounts with active duty assignments
+\end{itemize}
+
+\subsubsection{Driver Duty Assignment}
+\begin{itemize}
+    \item \textbf{FR-067}: The system shall allow administrators to assign drivers to specific buses
+    \item \textbf{FR-068}: The system shall allow administrators to create duty schedules for drivers
+    \item \textbf{FR-069}: The system shall allow administrators to modify duty assignments
+    \item \textbf{FR-070}: The system shall prevent assigning one driver to multiple duties at same time
+    \item \textbf{FR-071}: The system shall prevent assigning one bus to multiple routes at same time
+\end{itemize}
+
+\subsubsection{Record Reports}
+\begin{itemize}
+    \item \textbf{FR-072}: The system shall generate daily operational reports automatically
+    \item \textbf{FR-073}: The system shall generate weekly operational reports automatically
+    \item \textbf{FR-074}: The system shall generate monthly operational reports automatically
+    \item \textbf{FR-075}: The system shall store all generated reports in database
+    \item \textbf{FR-076}: The system shall send report copies to administrator mobile application
+    \item \textbf{FR-077}: The system shall allow administrators to export reports in PDF format
+\end{itemize}
+
+\newpage
+
+% ================= 4. NON-FUNCTIONAL REQUIREMENTS =================
+\section{Non-Functional Requirements}
+
+\subsubsection{Performance Requirements}
+\begin{itemize}
+    \item \textbf{NFR-001}: The system shall update bus locations with maximum 5-second latency
+    \item \textbf{NFR-002}: The system shall support at least 1000 concurrent users
+    \item \textbf{NFR-003}: The system shall load the map interface within 3 seconds on 4G connection
+    \item \textbf{NFR-004}: The system shall calculate EAT within 2 seconds of request
+    \item \textbf{NFR-005}: The system shall respond to API requests within 1 second under normal load
+    \item \textbf{NFR-006}: The system shall handle at least 50 buses tracking simultaneously
+    \item \textbf{NFR-007}: The system shall maintain database query response time under 500ms
+\end{itemize}
+
+\subsubsection{Security Requirements}
+\begin{itemize}
+    \item \textbf{NFR-008}: The system shall encrypt all data transmission using TLS 1.3
+    \item \textbf{NFR-009}: The system shall store passwords using bcrypt hashing with salt rounds of 10
+    \item \textbf{NFR-010}: The system shall implement JWT authentication with secure signing algorithms
+    \item \textbf{NFR-011}: The system shall enforce HTTPS for all API communications
+    \item \textbf{NFR-012}: The system shall validate and sanitize all user inputs to prevent injection attacks
+    \item \textbf{NFR-013}: The system shall implement rate limiting of 100 requests per minute per user
+    \item \textbf{NFR-014}: The system shall log all authentication attempts for security auditing
+    \item \textbf{NFR-015}: The system shall automatically expire inactive sessions after 24 hours
+    \item \textbf{NFR-016}: The system shall comply with OWASP Top 10 security standards
+    \item \textbf{NFR-017}: The system shall implement role-based access control (RBAC) for all operations
+\end{itemize}
+
+\subsubsection{Reliability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-018}: The system shall maintain 99.5\% uptime during operational hours (6 AM - 11 PM)
+    \item \textbf{NFR-019}: The system shall recover from server failures within 5 minutes using auto-restart
+    \item \textbf{NFR-020}: The system shall implement automatic database backups every 24 hours
+    \item \textbf{NFR-021}: The system shall retain backup data for minimum 30 days
+    \item \textbf{NFR-022}: The system shall gracefully handle GPS signal loss without crashing
+    \item \textbf{NFR-023}: The system shall continue functioning offline with cached data
+    \item \textbf{NFR-024}: The system shall automatically reconnect after network interruption
+    \item \textbf{NFR-025}: The system shall have a Mean Time Between Failures (MTBF) of at least 720 hours
+    \item \textbf{NFR-026}: The system shall log all critical errors for debugging and analysis
+    \item \textbf{NFR-027}: The system shall provide error messages that are informative and user-friendly
+\end{itemize}
+
+\subsubsection{Availability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-028}: The system shall be available 24/7 with planned maintenance window of 2 hours weekly
+    \item \textbf{NFR-029}: The system shall notify users 24 hours before scheduled maintenance
+    \item \textbf{NFR-030}: The system shall implement load balancing for high availability
+    \item \textbf{NFR-031}: The system shall have redundant database servers for failover
+    \item \textbf{NFR-032}: The system shall monitor server health continuously
+\end{itemize}
+
+\subsubsection{Maintainability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-033}: The system shall follow consistent coding standards and style guides
+    \item \textbf{NFR-034}: The system shall include comprehensive inline code documentation
+    \item \textbf{NFR-035}: The system shall use modular architecture for easy component updates
+    \item \textbf{NFR-036}: The system shall maintain detailed API documentation
+    \item \textbf{NFR-037}: The system shall implement automated testing with minimum 80\% code coverage
+    \item \textbf{NFR-038}: The system shall use version control (Git) for all code changes
+    \item \textbf{NFR-039}: The system shall allow feature updates without system downtime
+    \item \textbf{NFR-040}: The system shall provide administrator tools for configuration management
+\end{itemize}
+
+\subsubsection{Portability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-041}: The mobile application shall run on Android 8.0 (API level 26) and above
+    \item \textbf{NFR-042}: The system shall support responsive design for various screen sizes (4" to 7")
+    \item \textbf{NFR-043}: The system shall be deployable on any cloud platform (AWS, GCP, Azure)
+\end{itemize}
+
+\subsubsection{Usability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-044}: The system shall provide an intuitive interface requiring no training for passengers
+    \item \textbf{NFR-045}: The system shall support English language
+    \item \textbf{NFR-046}: The system shall use universally recognizable icons and symbols
+    \item \textbf{NFR-047}: The system shall provide help text and tooltips for complex features
+    \item \textbf{NFR-048}: The system shall follow Material Design guidelines for Android
+    \item \textbf{NFR-049}: The system shall allow users to complete common tasks in maximum 3 clicks/taps
+    \item \textbf{NFR-050}: The system shall provide visual feedback for all user actions within 200ms
+    \item \textbf{NFR-051}: The system shall use consistent color schemes and typography throughout
+\end{itemize}
+
+\subsubsection{Scalability Requirements}
+\begin{itemize}
+    \item \textbf{NFR-052}: The system shall scale horizontally to support up to 10,000 concurrent users
+    \item \textbf{NFR-053}: The system shall support tracking of up to 500 buses simultaneously
+    \item \textbf{NFR-054}: The database shall handle up to 1 million location records per day
+    \item \textbf{NFR-055}: The system shall support expansion to multiple cities without architectural changes
+    \item \textbf{NFR-056}: The system shall implement caching strategies to reduce database load
+\end{itemize}
+
+\subsubsection{Compatibility Requirements}
+\begin{itemize}
+    \item \textbf{NFR-057}: The system shall work with GPS accuracy of ±10 meters
+    \item \textbf{NFR-058}: The system shall function on networks with minimum 256 kbps bandwidth
+    \item \textbf{NFR-059}: The system shall be compatible with various GPS tracking device manufacturers
+    \item \textbf{NFR-060}: The system shall integrate with existing transportation management systems via APIs
+\end{itemize}
+
+\subsubsection{Legal and Compliance Requirements}
+\begin{itemize}
+    \item \textbf{NFR-061}: The system shall comply with Pakistan's Personal Data Protection Bill requirements
+    \item \textbf{NFR-062}: The system shall obtain explicit user consent for location tracking
+    \item \textbf{NFR-063}: The system shall provide users ability to delete their personal data
+    \item \textbf{NFR-064}: The system shall maintain data privacy in accordance with Islamic principles
+    \item \textbf{NFR-065}: The system shall comply with Google Maps API terms of service
+    \item \textbf{NFR-066}: The system shall include proper attribution for third-party services
+\end{itemize}
+
+\subsubsection{Environmental Requirements}
+\begin{itemize}
+    \item \textbf{NFR-067}: The mobile application shall optimize battery consumption to maximum 5\% per hour
+    \item \textbf{NFR-068}: The system shall optimize data usage to consume maximum 10MB per hour for users
+    \item \textbf{NFR-069}: The system shall reduce server power consumption through efficient algorithms
+\end{itemize}
+
+\newpage
+
+% ================= 5. EXTERNAL INTERFACE REQUIREMENTS =================
+\section{External Interface Requirements}
+
+\subsubsection{Hardware Interfaces}
+\begin{itemize}
+    \item \textbf{HW-001}: The system shall interface with GPS sensors installed in mobiles of drivers via HTTP/HTTPS protocol
+    \item \textbf{HW-002}: The system shall receive location data in standard GPS format (latitude, longitude, altitude, speed)
+    \item \textbf{HW-003}: The system shall accept location updates at intervals of 5-10 seconds
+    \item \textbf{HW-004}: The system shall support touchscreen input on mobile devices
+\end{itemize}
+
+\subsubsection{Software Interfaces}
+\begin{itemize}
+    \item \textbf{SW-001}: The system shall integrate with Google Maps API v3 for map display and routing
+    \item \textbf{SW-002}: The system shall use Google Maps Directions API for route planning and EAT calculation
+    \item \textbf{SW-003}: The system shall use MongoDB database for storing:
+    \begin{itemize}
+        \item Driver accounts
+        \item Administrator accounts
+        \item Bus information and assignments
+        \item Route and schedule data
+        \item Previous schedules and routes
+    \end{itemize}
+    \item \textbf{SW-004}: The system shall use Redis cache for storing:
+    \begin{itemize}
+        \item Current bus locations (real-time data)
+        \item Active user sessions
+        \item Frequently accessed route information
+    \end{itemize}
+    \item \textbf{SW-005}: The system shall run on Node.js v18+ runtime environment
+    \item \textbf{SW-006}: The system shall use Express.js framework for RESTful API development
+    \item \textbf{SW-007}: The system shall implement Socket.io for WebSocket communication
+    \item \textbf{SW-008}: The system shall be compatible with Flutter SDK 3.0+
+\end{itemize}
+
+\subsubsection{Communication Interfaces}
+\begin{itemize}
+    \item \textbf{COM-001}: The system shall communicate via HTTPS protocol for all API requests
+    \item \textbf{COM-002}: The system shall use WebSocket (Socket.io) for real-time location updates
+    \item \textbf{COM-003}: The system shall transmit data in JSON format
+    \item \textbf{COM-004}: The system shall implement JWT-based authentication for API security
+    \item \textbf{COM-005}: The system shall support IPv4 and IPv6 protocols
+    \item \textbf{COM-006}: The system shall work with minimum bandwidth of 256 kbps
+    \item \textbf{COM-007}: The system shall implement connection retry logic with exponential backoff
+    \item \textbf{COM-008}: The system shall compress data transmission using gzip compression
+\end{itemize}
+
+\newpage
+
+% ================= 6. APPENDICES =================
+\section{Appendices}
+
+% In Appendix A:
+\subsection{Appendix A: Use Case Diagram}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{use_case.png}
+    \caption{Use Case Diagram for Electric Bus Location Tracker App}
+    \label{fig:usecase}
+\end{figure}
+
+\textbf{Description:}
+
+The Use Case Diagram illustrates the primary actors and their interactions with the system:
+
+\textbf{Actors:}
+\begin{itemize}
+    \item \textbf{Passenger}: Who track buses and view information
+    \item \textbf{Driver}: Bus operators who start duties, view duties, and share location
+    \item \textbf{Administrator}: System managers who monitor and control operations
+    \item \textbf{GPS System}: External system providing location data
+    \item \textbf{Google Maps API}: External service for mapping and routing
+    \item \textbf{PMA Database}: Records every activity and gives access to data when needed
+\end{itemize}
+
+\textbf{Key Use Cases:}
+
+\textit{Driver and Admin Combined Functions:}
+\begin{itemize}
+\item User Authentication and Authorization (FR-001 to FR-008)
+\item Profile Management (FR-009)
+\end{itemize}
+
+\textit{Passenger Functions:}
+\begin{itemize}
+    \item Real-time Bus Tracking (FR-010 to FR-013)
+    \item Search Routes and Schedules (FR-014 to FR-022)
+    \item Estimated Arrival Time (EAT) (FR-023 to FR-028)
+    \item Manage Favorite Routes (FR-029 to FR-032)
+\end{itemize}
+
+\textit{Driver Functions:}
+\begin{itemize}
+    \item Duty Management (FR-033 to FR-041)
+    \item Live Location Sharing (FR-042 to FR-048)
+\end{itemize}
+
+\textit{Administrator Functions:}
+\begin{itemize}
+    \item Bus Monitoring and Management (FR-049 to FR-054)
+    \item Route and Schedule Management (FR-055 to FR-060)
+    \item User Account Management (FR-061 to FR-066)
+    \item Driver and Duty Assignment (FR-067 to FR-071)
+    \item Reports and Record (FR-072 to FR-077)
+\end{itemize}
+\newpage
+
+
+% In Appendix B:
+\subsection{Appendix B: Context Diagram}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Context.png}
+    \caption{Context Diagram for Electric Bus Location Tracker App}
+    \label{fig:context}
+\end{figure}
+
+\textbf{Description:}
+
+The Context Diagram shows the Electric Bus Location Tracker System as a central entity with its external interfaces:
+
+\textbf{External Entities:}
+\begin{itemize}
+    \item \textbf{Passengers}: Receive real-time bus information, routes, schedules, and EAT
+    \item \textbf{Drivers}: Send GPS location data, view duties; receive duty assignments and view all previous skipped and completed duties
+    \item \textbf{Administrators}: Monitor system, manage routes/schedules/buses, receive reports
+    \item \textbf{GPS Satellites}: Provide positioning data for accurate tracking
+    \item \textbf{Google Maps API}: Provides mapping services, route calculations, and EAT data
+    \item \textbf{PMA (Punjab Mass Transit Authority)}: Registers administrators and gives access to data from their database
+\end{itemize}
+
+\subsection{Appendix C: Technology Stack Summary}
+
+\begin{table}[h]
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Component} & \textbf{Technology} & \textbf{Purpose} \\
+\hline
+Mobile Framework & Flutter & Cross-platform app development for Android \\
+\hline
+Backend Framework & Node.js + Express.js & Server-side application logic \\
+\hline
+Database & MongoDB & Primary data storage \\
+\hline
+Cache & Redis & Real-time data caching \\
+\hline
+Mapping Service & Google Maps API & Maps, routing, ETA calculation \\
+\hline
+Real-time Communication & Socket.io & Live location updates \\
+\hline
+Cloud Hosting & AWS (EC2, S3) & Server and file hosting \\
+\hline
+Authentication & JWT + bcrypt & Secure user authentication \\
+\hline
+API Architecture & RESTful + WebSocket & Client-server communication \\
+\hline
+Version Control & GitHub & Code repository management \\
+\hline
+\end{tabular}
+\caption{Technology Stack Components}
+\end{table}
+
+\subsection{Appendix D: Glossary}
+
+\begin{description}
+    \item[Bus Stop] A designated location where buses pick up and drop off passengers
+    \item[Duty] Assigned work shift for a driver including route and bus assignment
+    \item[EAT (Estimated Arrival Time)] Calculated time when a bus will reach a specific stop
+    \item[GPS Coordinates] Latitude and longitude values representing a geographical location
+    \item[PMA] Punjab Mass Transit Authority - Government body managing public transport
+    \item[Real-time Tracking] Continuous monitoring of bus locations with minimal delay
+    \item[Route] Predefined path that a bus follows with designated stops
+    \item[Schedule] Planned timing for bus departures and arrivals
+    \item[Session] Period during which a user remains logged into the system
+    \item[Stakeholder] Individual or organization with interest in the project
+    \item[WebSocket] Protocol enabling real-time bidirectional communication
+\end{description}
+
+
+\end{document}
